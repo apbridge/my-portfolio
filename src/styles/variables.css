@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Varela+Round&display=swap');
+
+body {
+    /* color scheme */
+    /* backgrounds */
+    --primary-background-color: #E6F0FA;        /* very light blue/white */
+    --secondary-background-color: #1E3A5F;      /* deep navy blue */
+    --third-background-color: #4BA3C7;          /* medium blue */
+
+    /* text */
+    --light-text-color: #1E3A5F;                /* dark blue */
+    --dark-text-color: #E6F0FA;                 /* soft white */
+
+    /* button */
+    --button-light-mode-color: #A8C4E4;         /* pastel blue */
+    --button-dark-mode-color: #BFDFFB;          /* lighter blue */
+    --button-light-text-color: #FFFFFF;         /* white */
+    --button-dark-text-color: #1E3A5F;          /* dark blue */
+
+    --button-hover-light-color: #8FB3D9;        /* hover - darker pastel */
+    --button-hover-dark-color: #D6EDFF;         /* hover - soft sky blue */
+
+    /* header/footer */
+    --header-light-color: #4BA3C7;              /* matching third bg */
+    --header-light-text-color: #FFFFFF;
+    --header-dark-color: #2C547A;               /* dark steel blue */
+    --header-dark-text-color: #E6F0FA;
+
+    /* links */
+    --link-color: #007ACC;                      /* bright link blue */
+    --link-hover-color: #339EDC;                /* lighter blue on hover */
+
+    /* font */
+    --font-family: "Mulish", sans-serif;
+
+    /* break points */
+    --mobile: 768px;
+    --tablet: 1024px;
+
+    /* shadow */
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    --success-color: #3498db;                   /* sky blue (instead of green) */
+    --error-color: #1F3B5B;                     /* deep blue (instead of red) */
+}

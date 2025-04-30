@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import { HashRouter, Routes, Route } from "react-router-dom";
+import HomePage from './pages/HomePage';
+import GDPage from './pages/GraphicDesignPage';
+import WDPage from './pages/WebsiteDesignPage';
+import UXPage from './pages/UXDesignPage';
+import TDPage from './pages/TDPage';
+import IllPage from './pages/IllustrationPage';
+import NavBar from "./components/NavBar";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <HashRouter>
+      <>
+        <NavBar />
+        <main>
+          <Routes>
+            {/* Home Page */}
+            <Route path="/" element={<HomePage />} />
 
-export default App
+            {/* Graphic Design Page */}
+            <Route path="/graphic-design" element={<GDPage />} />
+
+            {/* Website Design Page */}
+            <Route path="/website-design" element={<WDPage />} />
+
+            {/* UX Design Page */}
+            <Route path="/ux-design" element={<UXPage />} />
+
+            {/* 3D Modeling Page */}
+            <Route path="/3d-modeling" element={<TDPage />} />
+
+            {/* Illustration Page */}
+            <Route path="/illustration" element={<IllPage />} />
+
+            {/* 404 Not Found Page */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
+    </HashRouter>
+  );
+};
+
+export default App;

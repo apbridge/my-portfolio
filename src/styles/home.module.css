@@ -1,0 +1,237 @@
+/* General styling */
+.container1 {
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--primary-background-color);
+  }
+  
+  h1, h2 {
+    color: var(--light-text-color);
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--link-color);
+  }
+  
+  h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--third-background-color);
+    text-align: center;
+  }
+  
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--third-background-color);
+    margin: 2rem 0;
+  }
+  
+  /* About Section */
+  .aboutContent {
+    margin-bottom: 2rem;
+  }
+  
+  .aboutHeading {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--third-background-color);
+    text-align: center;
+  }
+  
+  .aboutWrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .aboutImageWrapper {
+    flex: 1;
+  }
+  
+  .aboutImage {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .aboutText {
+    flex: 2;
+    text-align: left;
+    color: var(--light-text-color);
+  }
+  
+  .aboutText h4 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .aboutText p {
+    margin-bottom: 1rem;
+  }
+  
+  .email, .linkedin {
+    display: inline-block;
+    color: var(--link-color);
+    text-decoration: underline;
+    margin-top: 1rem;
+  }
+  
+  .email:hover, .linkedin:hover {
+    color: var(--link-hover-color);
+  }
+  
+  /* Featured Projects */
+  .featuredProjects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+  }
+  
+  .projectCard {
+    background-color: var(--secondary-background-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 350px;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .projectCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .projectImage {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .cardContent {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .cardContent h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--third-background-color);
+    text-align: left;
+  }
+  
+  .cardContent p {
+    font-size: 1rem;
+    color: var(--dark-text-color);
+    margin-bottom: 1rem;
+  }
+  
+  .projectButton {
+    color: var(--button-light-text-color);
+    background-color: var(--button-light-mode-color);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    max-width: 190px;
+  }
+  
+  .projectButton:hover {
+    background-color: var(--button-hover-light-color);
+  }
+  
+  /* Responsive Design */
+  
+  /* Tablet: Adjust headings and project layout */
+  @media (max-width: var(--tablet)) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    h3 {
+      font-size: 1.25rem;
+    }
+  
+    .aboutImage {
+      max-width: 250px;
+    }
+  
+    .aboutText {
+      flex: none;
+    }
+  
+    .featuredProjects {
+      gap: 1rem;
+    }
+  }
+  
+  /* 1024px and smaller: 2 columns */
+  @media (max-width: 1024px) {
+    .featuredProjects {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Mobile and 768px: 1 column layout */
+  @media (max-width: var(--mobile)), (max-width: 768px) {
+    .featuredProjects {
+      grid-template-columns: 1fr;
+    }
+  
+    .aboutWrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .aboutText {
+      text-align: left;
+      width: 100%;
+    }
+  
+    .aboutImageWrapper {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .aboutImage {
+      width: 100%;
+      height: auto;
+    }
+  
+    .aboutContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .aboutHeading {
+      order: -1;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  
