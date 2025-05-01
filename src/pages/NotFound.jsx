@@ -6,7 +6,7 @@ const NotFound = () => {
     <div className={styles.wrappers}>
       <h1 className={styles.title}>404</h1>
       <p className={styles.message}>Sorry, the page you are looking for is not found.</p>
-      <Link to="/" className={styles.link}>Go back to Home</Link>
+      <Link to="/" className={styles.link} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Go back to Home</Link>
     </div>
   );
 };

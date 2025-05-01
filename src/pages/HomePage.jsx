@@ -1,7 +1,32 @@
 import styles from '../styles/home.module.css';
-import dino from '../assets/dino.png';
-import babybelle from '../assets/babybelle.jpg';
+import babybelle from '../assets/home/babybelle.jpg';
+import dino from '../assets/gd/dino.png';
+import placeholder from '../assets/placeholder.png'
 import { Link } from "react-router-dom";
+
+const projects = [
+    {
+        id: 1,
+        photo: dino,
+        projectName: 'Custom Character Designs',
+        description: 'Unique and personalized character designs created for custom calendars at SDI Innovations. Created with Adobe Photoshop.',
+        link: '/graphic-design',
+    },
+    {
+        id: 2,
+        photo: placeholder,
+        projectName: 'Website Recreation Project',
+        description: 'This project was created in React.js for the Website Recreation Project for CGT 390 at Purdue University.',
+        link: '/website-design',
+    },
+    {
+        id: 3,
+        photo: placeholder,
+        projectName: 'What Else Can A Starship Do?',
+        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        link: '/ux-design',
+    },
+]
 
 const HomePage = () => {
     return (
@@ -14,7 +39,7 @@ const HomePage = () => {
                 </div>
                 <hr />
                 <div className={styles.aboutContent}>
-                <h4 class={styles.aboutHeading}>About Me</h4>
+                    {/* <h4 className={styles.aboutHeading}>About Me</h4> */}
                     <div className={styles.aboutWrapper}>
                         <div className={styles.aboutImageWrapper}>
                             <img className={styles.aboutImage} src={babybelle} alt="Annabelle" />
@@ -27,7 +52,7 @@ const HomePage = () => {
                             <a className={styles.email} href="mailto:apbridge22@gmail.com">
                                 apbridge22@gmail.com
                             </a>
-                            <br/>
+                            <br />
                             <a
                                 className={styles.linkedin}
                                 href="https://www.linkedin.com/in/apbridge"
@@ -41,30 +66,17 @@ const HomePage = () => {
                 </div>
                 <hr />
                 <h4 className={styles.h4}>Featured Projects</h4>
-                <div className={styles.featuredProjects}>
-                    <div className={styles.projectCard}>
-                        <img className={styles.projectImage} src={dino} alt="Project 1" />
-                        <div className={styles.cardContent}>
-                            <h4>Custom Characters</h4>
-                            <p>I created a series of original character designs using Adobe Photoshop, focusing on a consistent visual style.</p>
-                            <Link to="/graphic-design" className={styles.projectButton}>View More Like This</Link>
+                <div className={styles.projectGrid}>
+                    {projects.map((project) => (
+                        <div key={project.id} className={styles.projectCard}>
+                            <img src={project.photo} alt={project.projectName} className={styles.projectImage} />
+                            <h5 className={styles.projectTitle}>{project.projectName}</h5>
+                            <p className={styles.projectDescription}>{project.description}</p>
+                            <Link to={project.link} className={styles.projectButton} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                                View
+                            </Link>
                         </div>
-                    </div>
-                    <div className={styles.projectCard}>
-                        <img className={styles.projectImage} src={dino} alt="Project 2" />
-                        <div className={styles.cardContent}>
-                            <h4>Website Designs</h4>
-                            <p>This is a short description of another project...</p>
-                            <Link to="/website-design" className={styles.projectButton}>View More Like This</Link>
-                        </div>
-                    </div>
-                    <div className={styles.projectCard}>
-                        <img className={styles.projectImage} src={dino} alt="Project 3" />
-                        <div className={styles.cardContent}>
-                            <h4>Poster Designs</h4>
-                            <p>This is a short description of another project...</p>
-                            <Link to="/graphic-design" className={styles.projectButton}>View More Like This</Link>                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </>

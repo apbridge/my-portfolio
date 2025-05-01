@@ -15,10 +15,10 @@ const Navbar = () => {
                 <Link to="/">ANNABELLE BRIDGEWATERS</Link>
             </div>
             <p className={styles.menuButton} onClick={toggleMenu}>
-            {isOpen ? "CLOSE" : "MENU"}
+                {isOpen ? "CLOSE" : "MENU"}
             </p>
 
-            <ul className={`${styles.navLinks} ${isOpen ? styles.showMenu : ""}`}>
+            <ul className={`${styles.navLinks} ${isOpen ? styles.showMenu : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                 <li>
                     <Link to="/" onClick={() => setIsOpen(false)}>HOME</Link>
                 </li>
