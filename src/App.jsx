@@ -10,6 +10,8 @@ import IllPage from './pages/IllustrationPage';
 import NavBar from "./components/NavBar";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
+import CDPage from "./pages/GDPages/CharacterPage";
+import CaDPage from "./pages/GDPages/CalendarPage";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,34 +19,42 @@ function App() {
   return (
     <HashRouter>
       <>
-        <NavBar />
-        <main>
-          <Routes>
-            {/* Home Page */}
-            <Route path="/" element={<HomePage />} />
+        <div className="appWrapper">
+          <NavBar />
+          <main className="mainContent">
+            <Routes>
+              {/* Home Page */}
+              <Route path="/" element={<HomePage />} />
 
-            {/* Graphic Design Page */}
-            <Route path="/graphic-design" element={<GDPage />} />
+              {/* Graphic Design Page */}
+              <Route path="/graphic-design" element={<GDPage />} />
 
-            {/* Website Design Page */}
-            <Route path="/website-design" element={<WDPage />} />
+              {/* Website Design Page */}
+              <Route path="/website-design" element={<WDPage />} />
 
-            {/* UX Design Page */}
-            <Route path="/ux-design" element={<UXPage />} />
+              {/* UX Design Page */}
+              <Route path="/ux-design" element={<UXPage />} />
 
-            {/* 3D Modeling Page */}
-            <Route path="/3d-modeling" element={<TDPage />} />
+              {/* 3D Modeling Page */}
+              <Route path="/3d-modeling" element={<TDPage />} />
 
-            {/* Illustration Page */}
-            <Route path="/illustration" element={<IllPage />} />
+              {/* Illustration Page */}
+              <Route path="/illustration" element={<IllPage />} />
 
-            {/* 404 Not Found Page */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <footer>
-          <Footer />
-        </footer>
+              {/* 404 Not Found Page */}
+              <Route path="*" element={<NotFound />} />
+
+              {/* Characters Design Page */}
+              <Route path="/character-design" element={<CDPage />} />
+
+              {/* Calendars Design Page */}
+              <Route path="/calendar-design" element={<CaDPage />} />
+            </Routes>
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+        </div>
       </>
     </HashRouter>
   );

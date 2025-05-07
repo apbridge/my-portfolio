@@ -55,7 +55,9 @@ const IllustrationPage = () => {
                 <div className={styles.projectGrid}>
                     {projects.map((project) => (
                         <div key={project.id} className={styles.projectCard}>
-                            <img src={project.photo} alt={project.projectName} className={styles.projectImage} />
+                            <div className={styles.projectImageWrapper}>
+                                <img src={project.photo} alt={project.projectName} className={styles.projectImage} />
+                            </div>
                             <h5 className={styles.projectTitle}>{project.projectName}</h5>
                             <p className={styles.projectDescription}>{project.description}</p>
                             <Link to={project.link} className={styles.projectButton} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>

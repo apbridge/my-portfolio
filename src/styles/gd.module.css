@@ -1,77 +1,97 @@
 .container {
-    background-color: var(--primary-background-color);
-    padding: 2rem;
+  background-color: var(--primary-background-color);
+  padding: 2rem;
 }
+
+h1 {
+  font-size: 24pt;
+}
+
 .projectGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 1rem;
-    padding: 0 2rem;
-  }
-  
-  .projectCard {
-    background-color: #f8f8f8;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 420px;
-    /* Make card taller */
-    transition: transform 0.2s;
-  }
-  
-  .projectCard:hover {
-    transform: translateY(-5px);
-  }
-  
-  .projectImage {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .projectTitle {
-    margin-top: 0.75rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  
-  .projectDescription {
-    margin-top: 0.5rem;
-    font-size: 0.95rem;
-    color: var(--light-text-color);
-    flex-grow: 1;
-  }
-  
-  .projectButton {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--button-light-mode-color);
-    color: var(--button-light-text-color);
-    text-align: center;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s;
-  }
-  
-  .projectButton:hover {
-    background-color: var(--button-hover-light-color);
-  }
-  /* Responsive Design for smaller screens */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 0 2rem;
+}
+
+.projectCard {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 420px;
+  transition: transform 0.2s;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+}
+
+/* NEW: Wrapper that maintains a square aspect ratio */
+.projectImageWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect ratio for square image */
+  overflow: hidden;
+  border-radius: 8px;
+  /* background-color: #fff; Optional: shows behind images */
+}
+
+/* NEW: Image fills the square wrapper cleanly */
+.projectImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* use 'contain' if you want full image visible */
+  object-position: center;
+  border-radius: 8px;
+}
+
+.projectTitle {
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.projectDescription {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--light-text-color);
+  flex-grow: 1;
+}
+
+.projectButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--button-light-mode-color);
+  color: var(--button-light-text-color);
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.projectButton:hover {
+  background-color: var(--button-hover-light-color);
+}
+
+/* Responsive Design for smaller screens */
 @media (max-width: 1024px) {
   .projectGrid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .projectGrid {
-    grid-template-columns: 1fr; /* 1 column for mobile */
-    padding: 0 1rem; /* Reduce padding on mobile */
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
   }
 }

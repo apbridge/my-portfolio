@@ -1,3 +1,42 @@
 @import "../src/styles/reset.css";
 @import "../src/styles/variables.css";
 @import "../src/styles/global.css";
+
+/* Full height setup */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Flex layout */
+  .appWrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Allows main content to expand and push footer down */
+  .mainContent {
+    flex: 1;
+  }
+  
+/* Ensure body and root don't allow extra scrolling */
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  /* Remove default margins that can cause push */
+  main, .mainContent {
+    margin: 0;
+    padding-bottom: 0; /* Eliminate extra scroll space */
+  }
+  
+  /* Prevent images or sections from overflowing */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  

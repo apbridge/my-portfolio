@@ -5,6 +5,7 @@
     font-family: var(--font-family);
     font-size: 0.95rem;
     box-shadow: var(--box-shadow);
+    margin: 0;
   }
   
   .container {

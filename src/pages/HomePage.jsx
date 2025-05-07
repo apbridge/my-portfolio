@@ -1,5 +1,5 @@
 import styles from '../styles/home.module.css';
-import babybelle from '../assets/home/babybelle.jpg';
+// import babybelle from '../assets/home/babybelle.jpg';
 import dino from '../assets/gd/dino.png';
 import placeholder from '../assets/placeholder.png'
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const projects = [
         photo: dino,
         projectName: 'Custom Character Designs',
         description: 'Unique and personalized character designs created for custom calendars at SDI Innovations. Created with Adobe Photoshop.',
-        link: '/graphic-design',
+        link: '/character-design',
     },
     {
         id: 2,
@@ -42,7 +42,7 @@ const HomePage = () => {
                     {/* <h4 className={styles.aboutHeading}>About Me</h4> */}
                     <div className={styles.aboutWrapper}>
                         <div className={styles.aboutImageWrapper}>
-                            <img className={styles.aboutImage} src={babybelle} alt="Annabelle" />
+                            <img className={styles.aboutImage} src={placeholder} alt="Annabelle" />
                         </div>
                         <div className={styles.aboutText}>
                             <p>Hi! I'm Annabelle Bridgewaters, a Senior studying Web Programming & Design at Purdue University. I'm passionate about combining creativity and technology to build functional, aesthetically pleasing designs. In my free time, I enjoy photo editing and creating visuals from scratch using Adobe Photoshop, including posters, graphic arts, and digital illustrations.</p>
