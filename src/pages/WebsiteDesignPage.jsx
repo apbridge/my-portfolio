@@ -7,77 +7,77 @@ const projects = [
         id: 1,
         photo: placeholder,
         projectName: 'My Portfolio (This Website)',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 2,
         photo: placeholder,
         projectName: 'Richelle In A Handbasket - Digital Delights',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 3,
         photo: placeholder,
         projectName: 'Website Recreation Project',
-        description: 'Unique and personalized character designs created for custom calendars at SDI Innovations. Created with Adobe Photoshop.',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 4,
         photo: placeholder,
         projectName: 'Profile App Project',
-        description: 'This project was created in React.js for the Website Recreation Project for CGT 390 at Purdue University.',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 5,
         photo: placeholder,
         projectName: 'Data Management System',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 6,
         photo: placeholder,
         projectName: 'Forms Projects',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 7,
         photo: placeholder,
         projectName: 'Zoom Images',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 8,
         photo: placeholder,
         projectName: 'Alien Mini Game',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 9,
         photo: placeholder,
         projectName: 'Hover Project',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 10,
         photo: placeholder,
         projectName: 'Sliding Images Project',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
     {
         id: 11,
         photo: placeholder,
         projectName: 'Student Connect Project',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/website-design',
     },
 
@@ -88,6 +88,7 @@ const WebsiteDesignPage = () => {
         <>
             <div className={styles.container}>
                 <h1>Website Design</h1>
+                <hr />
                 <div className={styles.projectGrid}>
                     {projects.map((project) => (
                         <div key={project.id} className={styles.projectCard}>

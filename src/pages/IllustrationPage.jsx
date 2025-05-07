@@ -7,42 +7,42 @@ const projects = [
         id: 1,
         photo: placeholder,
         projectName: 'Purple Cry',
-        description: 'Unique and personalized character designs created for custom calendars at SDI Innovations. Created with Adobe Photoshop.',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 2,
         photo: placeholder,
         projectName: 'Landscape',
-        description: 'This project was created in React.js for the Website Recreation Project for CGT 390 at Purdue University.',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 3,
         photo: placeholder,
         projectName: 'Space Brain',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 4,
         photo: placeholder,
         projectName: 'Still Life',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 5,
         photo: placeholder,
         projectName: 'Yoshi',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 6,
         photo: placeholder,
         projectName: 'Various Plants',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
 ]
@@ -52,6 +52,7 @@ const IllustrationPage = () => {
         <>
             <div className={styles.container}>
                 <h1>Illustrations</h1>
+                <hr />
                 <div className={styles.projectGrid}>
                     {projects.map((project) => (
                         <div key={project.id} className={styles.projectCard}>

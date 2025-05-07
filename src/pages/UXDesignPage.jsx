@@ -14,14 +14,14 @@ const projects = [
         id: 2,
         photo: placeholder,
         projectName: 'Embodied Shopping',
-        description: 'This project was created in React.js for the Website Recreation Project for CGT 390 at Purdue University.',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 3,
         photo: placeholder,
         projectName: 'Fake Out',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
 ]
@@ -31,6 +31,7 @@ const UXDesignPage = () => {
         <>
             <div className={styles.container}>
                 <h1>UX Design</h1>
+                <hr />
                 <div className={styles.projectGrid}>
                     {projects.map((project) => (
                         <div key={project.id} className={styles.projectCard}>

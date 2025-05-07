@@ -1,0 +1,37 @@
+.container {
+    padding: 2rem;
+    background-color: var(--primary-background-color);
+    font-family: var(--font-family);
+    color: var(--light-text-color);
+    text-align: center;
+  }
+  
+  .text {
+    margin-bottom: 2rem;
+  }
+  
+  .h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-background-color);
+    margin-bottom: 1rem;
+  }
+  
+  .p {
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 0.5rem auto;
+    color: var(--light-text-color);
+  }
+  
+  .created {
+    font-size: 0.875rem;
+    color: var(--light-text-color);
+    font-style: italic;
+  }
+  .click {
+    font-size: 0.875rem;
+    color: var(--link-color);
+    font-style: bold;
+  }
+  

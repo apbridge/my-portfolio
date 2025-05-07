@@ -7,35 +7,35 @@ const projects = [
         id: 1,
         photo: placeholder,
         projectName: 'Potted Plant',
-        description: 'Unique and personalized character designs created for custom calendars at SDI Innovations. Created with Adobe Photoshop.',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 2,
         photo: placeholder,
         projectName: 'Modern House',
-        description: 'This project was created in React.js for the Website Recreation Project for CGT 390 at Purdue University.',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 3,
         photo: placeholder,
         projectName: 'Snowman',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 4,
         photo: placeholder,
         projectName: 'Kitchen Blockout',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
     {
         id: 5,
         photo: placeholder,
         projectName: 'Unit Blocks',
-        description: 'In the project, my team discovered other things that a Starship Robot could be used for on the Purdue University campus (besides food delivery).',
+        description: 'placeholder',
         link: '/ux-design',
     },
 ]
@@ -45,6 +45,7 @@ const TDPage = () => {
         <>
             <div className={styles.container}>
                 <h1>3D Modeling</h1>
+                <hr />
                 <div className={styles.projectGrid}>
                     {projects.map((project) => (
                         <div key={project.id} className={styles.projectCard}>

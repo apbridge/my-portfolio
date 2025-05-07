@@ -23,8 +23,166 @@
   margin: 0 auto 0.5rem auto;
   color: var(--light-text-color);
 }
+
 .created {
   font-size: 0.875rem;
   color: var(--light-text-color);
   font-style: italic;
+}
+.click {
+  font-size: 0.875rem;
+  color: var(--link-color);
+  font-style: bold;
+}
+.carousel {
+  margin: 0 auto;
+  max-width: 90%;
+  padding: 1rem 0;
+}
+
+.imageWrapper {
+  padding: 0.5rem;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+/* Custom arrow buttons style (no background, smaller size) */
+.customArrow {
+  background-color: transparent; /* Remove background */
+  color: var(--button-dark-text-color); /* Set the arrow color */
+  border: none;
+  font-size: 24px; /* Adjusted for better visibility */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 10px; /* Increase padding for better clickable area */
+  z-index: 100; /* Ensure arrows are on top */
+  display: flex; /* Ensure proper alignment */
+  align-items: center; /* Center the arrow vertically */
+  justify-content: center; /* Center the arrow horizontally */
+}
+
+/* Remove border on focus (clicked) */
+.customArrow:focus {
+  outline: none; /* Remove the outline */
+  border: none;  /* Remove any border that might appear */
+}
+
+/* Hover effect for arrows */
+.customArrow:hover {
+  color: var(--link-hover-color); /* Change color on hover */
+  background-color: transparent; /* Ensure no background color on hover */
+}
+
+/* Arrow positions */
+.slick-prev, .slick-next {
+  z-index: 1000; /* Ensure arrows are on top */
+}
+
+.prevArrow {
+  position: absolute;
+  left: -40px; /* Adjusted for better spacing */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nextArrow {
+  position: absolute;
+  right: -40px; /* Adjusted for better spacing */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Styles for Medium Images */
+.midGrid {
+  display: grid;
+  gap: 1rem;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0;
+  grid-template-columns: repeat(2, 1fr); /* Default to 2 columns */
+}
+
+@media (min-width: 1025px) {
+  .midGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on large screens */
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 600px) {
+  .midGrid {
+    grid-template-columns: repeat(1, 1fr); /* 2 columns on medium screens */
+  }
+}
+
+@media (max-width: 599px) {
+  .midGrid {
+    grid-template-columns: repeat(1, 1fr); /* 1 column on small screens */
+  }
+}
+
+/* Styles for Small & Big Images */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Default 3 columns for small and big images */
+  gap: 1rem;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+@media (max-width: 1024px) and (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr); /* 2 columns on medium screens */
+  }
+}
+
+@media (max-width: 599px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 column on small screens */
+  }
+}
+
+.singleImage {
+  max-width: 900px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+.singleGrid {
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+/* Specific Style for Miscellaneous Images */
+.miscImage {
+  max-width: 400px;   /* limits width */
+  width: 100%;        /* responsive scaling */
+  height: auto;       /* keeps proportions */
+  margin: 0 auto;     /* centers image */
+  display: block;
+}
+
+.h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--secondary-background-color);
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--secondary-background-color);
 }

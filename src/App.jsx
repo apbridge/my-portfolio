@@ -12,6 +12,8 @@ import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import CDPage from "./pages/GDPages/CharacterPage";
 import CaDPage from "./pages/GDPages/CalendarPage";
+import TypePage from "./pages/GDPages/TypePage";
+import MarPage from "./pages/GDPages/MarketingPage";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -49,6 +51,12 @@ function App() {
 
               {/* Calendars Design Page */}
               <Route path="/calendar-design" element={<CaDPage />} />
+
+               {/* Logo Design Page */}
+               <Route path="/type-design" element={<TypePage />} />
+
+                {/* Marketing Design Page */}
+                <Route path="/marketing" element={<MarPage />} />
             </Routes>
           </main>
           <footer>

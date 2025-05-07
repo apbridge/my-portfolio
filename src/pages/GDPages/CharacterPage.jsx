@@ -74,12 +74,12 @@ const CharacterPage = () => {
         </p>
         <p className={styles.created}>Created Summer 2024 for SDI Innovations</p>
       </div>
-
+      <hr />
       <div className={styles.carousel}>
         <Slider {...settings}>
           {images.map((img, index) => (
             <div key={index} className={styles.imageWrapper}>
-              <img src={img} alt={`character-${index}`} className={styles.image} />
+              <img src={img} alt={`character-${index}`} className={styles.image}  />
             </div>
           ))}
         </Slider>
