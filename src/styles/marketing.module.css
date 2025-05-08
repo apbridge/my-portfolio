@@ -78,6 +78,26 @@
     object-fit: cover;
     border-radius: 0.5rem;
   }
+  .photo1 {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+  .imageWrapper1 {
+    display: flex;
+    gap: 1rem; /* space between images */
+    justify-content: center; /* optional: center images horizontally */
+    align-items: center;     /* optional: align images vertically */
+    flex-wrap: wrap;         /* allows wrapping if screen is small */
+  }
+  
+  .photo2 {
+    width: 100%;
+    max-width: 400px; /* or whatever width works for your layout */
+    height: auto;
+  }
+  
   .h3 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -148,5 +168,57 @@
     right: -40px; /* Adjusted for better spacing */
     top: 50%;
     transform: translateY(-50%);
+  }
+  .container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .text {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  
+  .h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .created {
+    font-style: italic;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  /* Image wrapper with responsive handling */
+  .imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  
+  /* Responsive image */
+  .photo {
+    width: 100%;
+    max-width: 800px; /* Limit the max width of the image */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Optional: Adjust padding or font sizes for small screens */
+  @media (max-width: 600px) {
+    .photo {
+      max-width: 100%;
+    }
   }
   

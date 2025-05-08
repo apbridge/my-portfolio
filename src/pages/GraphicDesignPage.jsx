@@ -3,6 +3,12 @@ import placeholder from '../assets/placeholder.png';
 import dino from '../assets/gd/dino.png';
 import purple from '../assets/gd/purple-small.jpg';
 import banana from "../assets/gd/banana.jpg";
+import poster from "../assets/gd/movie.jpg";
+import bingo from "../assets/gd/bingo.jpg";
+import linework from "../assets/gd/linework.png";
+import spotify from "../assets/gd/spotify.jpg";
+import agenda from "../assets/gd/agenda.jpg";
+import collage from "../assets/gd/collage.jpg";
 import { Link } from "react-router-dom";
 import reveal from "../assets/gd/reveal.jpg";
 
@@ -30,45 +36,45 @@ const projects = [
     },
     {
         id: 4,
-        photo: placeholder,
+        photo: poster,
         projectName: 'Poster Designs',
-        description: 'placeholder',
-        link: '/graphic-design',
+        description: 'Various poster designs created in Adobe Photoshop.',
+        link: '/posters',
     },
     {
         id: 5,
-        photo: placeholder,
+        photo: bingo,
         projectName: 'Sxster Bingo',
-        description: 'placeholder',
-        link: '/graphic-design',
+        description: 'Sxster Bingo created in Adobe Photoshop in Spring 2024.',
+        link: '/bingo',
     },
     {
         id: 6,
-        photo: placeholder,
+        photo: linework,
         projectName: 'LineWork + Color',
-        description: 'placeholder',
-        link: '/graphic-design',
+        description: 'Linework done in Adobe Illustrator. Coloring done in Adobe Photoshop.',
+        link: '/linework',
     },
     {
         id: 7,
-        photo: placeholder,
+        photo: spotify,
         projectName: 'Infographic',
-        description: 'placeholder',
-        link: '/graphic-design',
+        description: 'Infographic created in Canva.com. Information from Spotify.com as of Spring 2023.',
+        link: '/infographic',
     },
     {
         id: 8,
-        photo: placeholder,
-        projectName: 'East Central High School Agenda Cover, Graduation Ticket, and Graduation Program Designs',
-        description: 'placeholder',
-        link: '/graphic-design',
+        photo: agenda,
+        projectName: 'East Central High School Agenda Cover and Graduation Program Designs',
+        description: 'Both the agenda cover and the graduation program were created in Adobe Photoshop.',
+        link: '/hs',
     },
     {
         id: 9,
-        photo: placeholder,
+        photo: collage,
         projectName: 'Photo Collage',
-        description: 'placeholder',
-        link: '/graphic-design',
+        description: 'Photo Collage created in Adobe Photoshop. None of the images used are mine. This collage won first place for digital design in the ECHS Spring 2021 Art Show.',
+        link: '/collage',
     },
     {
         id: 10,

@@ -14,6 +14,12 @@ import CDPage from "./pages/GDPages/CharacterPage";
 import CaDPage from "./pages/GDPages/CalendarPage";
 import TypePage from "./pages/GDPages/TypePage";
 import MarPage from "./pages/GDPages/MarketingPage";
+import PPage from "./pages/GDPages/PostersPage";
+import BPage from "./pages/GDPages/BingoPage";
+import LWPage from "./pages/GDPages/LineworkPage";
+import InfoPage from "./pages/GDPages/InfographicPage";
+import HSPage from "./pages/GDPages/HighSchoolPage";
+import PCPage from "./pages/GDPages/PhotoColllagePage";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -52,11 +58,29 @@ function App() {
               {/* Calendars Design Page */}
               <Route path="/calendar-design" element={<CaDPage />} />
 
-               {/* Logo Design Page */}
-               <Route path="/type-design" element={<TypePage />} />
+              {/* Logo Design Page */}
+              <Route path="/type-design" element={<TypePage />} />
 
-                {/* Marketing Design Page */}
-                <Route path="/marketing" element={<MarPage />} />
+              {/* Marketing Design Page */}
+              <Route path="/marketing" element={<MarPage />} />
+
+              {/* Poster Design Page */}
+              <Route path="/posters" element={<PPage />} />
+
+              {/* Sxster Bingo Page */}
+              <Route path="/bingo" element={<BPage />} />
+
+               {/* Linework Page */}
+               <Route path="/linework" element={<LWPage />} />
+
+               {/* Infographic Page */}
+               <Route path="/infographic" element={<InfoPage />} />
+
+                {/* High School Page */}
+                <Route path="/hs" element={<HSPage />} />
+
+                {/* Photo Collage Page */}
+                <Route path="/collage" element={<PCPage />} />
             </Routes>
           </main>
           <footer>

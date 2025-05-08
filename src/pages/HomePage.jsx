@@ -15,8 +15,8 @@ const projects = [
     {
         id: 2,
         photo: placeholder,
-        projectName: 'Website Recreation Project',
-        description: 'This project was created in React.js for the Website Recreation Project for CGT 390 at Purdue University.',
+        projectName: 'Richelle in a Handbasket - Digital Delights',
+        description: 'As a team member of Digital Delights, I helped created the new and improved Richelle in a Handbasket official website.',
         link: '/website-design',
     },
     {
