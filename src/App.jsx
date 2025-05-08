@@ -35,6 +35,13 @@ import RecPage from "./pages/WebPages/RecreationPage";
 import RicPage from "./pages/WebPages/RichellePage";
 import SPage from "./pages/WebPages/SlidingPage";
 import ZoomPage from "./pages/WebPages/ZoomPage";
+import Land from "./pages/IllPages/Landscape";
+import Purple from "./pages/IllPages/PurpleCry";
+import Space from "./pages/IllPages/SpaceBrain";
+import Still from "./pages/IllPages/StillLife";
+import Plants from "./pages/IllPages/VariousPlants";
+import Yoshi from "./pages/IllPages/Yoshi";
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -141,6 +148,24 @@ function App() {
 
                 {/* Zoom Images Page */}
                 <Route path="/zoom-images" element={<ZoomPage />} />
+
+                {/* Landscape Drawing Page */}
+                <Route path="/landscape" element={<Land />} />
+
+                {/*Purple Cry Drawing Page */}
+                <Route path="/purple-cry" element={<Purple />} />
+
+                {/* Space Brain Drawing Page */}
+                <Route path="/space-brain" element={<Space />} />
+
+                {/* Still Life Drawing Page */}
+                <Route path="/still-life" element={<Still />} />
+
+                {/* Various Plants Drawing Page */}
+                <Route path="/various-plants" element={<Plants />} />
+
+                {/* Yoshi Drawing Page */}
+                <Route path="/yoshi" element={<Yoshi />} />
             </Routes>
           </main>
           <footer>
