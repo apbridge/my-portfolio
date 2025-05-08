@@ -20,6 +20,21 @@ import LWPage from "./pages/GDPages/LineworkPage";
 import InfoPage from "./pages/GDPages/InfographicPage";
 import HSPage from "./pages/GDPages/HighSchoolPage";
 import PCPage from "./pages/GDPages/PhotoColllagePage";
+import CalcPage from "./pages/WebPages/CalcPage";
+import ColorPage from "./pages/WebPages/ColorPage";
+import BCPage from "./pages/WebPages/ConnectPage";
+import DCPage from "./pages/WebPages/DataConnPage";
+import DMSPage from "./pages/WebPages/DataManSysPage";
+import FormsPage from "./pages/WebPages/FormsPage";
+import HoverPage from "./pages/WebPages/HoverPage";
+import IDEPage from "./pages/WebPages/IDEPage";
+import MGPage from "./pages/WebPages/MiniGamesPage";
+import PortPage from "./pages/WebPages/PortfolioPage";
+import PAPage from "./pages/WebPages/ProfileAppPage";
+import RecPage from "./pages/WebPages/RecreationPage";
+import RicPage from "./pages/WebPages/RichellePage";
+import SPage from "./pages/WebPages/SlidingPage";
+import ZoomPage from "./pages/WebPages/ZoomPage";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -81,6 +96,51 @@ function App() {
 
                 {/* Photo Collage Page */}
                 <Route path="/collage" element={<PCPage />} />
+
+                {/* Calculator Page */}
+                <Route path="/calculator" element={<CalcPage />} />
+
+                {/* Color Converter Page */}
+                <Route path="/color-converter" element={<ColorPage />} />
+
+                {/* Boiler Connect Page */}
+                <Route path="/student-connect" element={<BCPage />} />
+
+                {/* Data Connections Page */}
+                <Route path="/data-connections" element={<DCPage />} />
+
+                {/* DMS Page */}
+                <Route path="/dms" element={<DMSPage />} />
+
+                {/* Forms Page */}
+                <Route path="/forms" element={<FormsPage />} />
+
+                {/* Hover Images Page */}
+                <Route path="/hover-images" element={<HoverPage />} />
+
+                {/* IDE Page */}
+                <Route path="/ide" element={<IDEPage />} />
+
+                {/* Mini Games Page */}
+                <Route path="/mini-games" element={<MGPage />} />
+
+                {/* My Portfolio Page */}
+                <Route path="/portfolio" element={<PortPage />} />
+
+                {/* Profile App Page */}
+                <Route path="/profile-app" element={<PAPage />} />
+
+                {/* Website Recreation Page */}
+                <Route path="/website-recreation" element={<RecPage />} />
+
+                {/* Richelle Page */}
+                <Route path="/richelle-in-a-handbasket" element={<RicPage />} />
+
+                {/* Sliding Images Page */}
+                <Route path="/sliding-images" element={<SPage />} />
+
+                {/* Zoom Images Page */}
+                <Route path="/zoom-images" element={<ZoomPage />} />
             </Routes>
           </main>
           <footer>
