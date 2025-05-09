@@ -41,7 +41,11 @@ import Space from "./pages/IllPages/SpaceBrain";
 import Still from "./pages/IllPages/StillLife";
 import Plants from "./pages/IllPages/VariousPlants";
 import Yoshi from "./pages/IllPages/Yoshi";
-
+import Blocks from "./pages/TDPages/Blocks";
+import House from "./pages/TDPages/House";
+import Kitchen from "./pages/TDPages/Kitchen";
+import Plant from "./pages/TDPages/Plant";
+import Snowman from "./pages/TDPages/Snowman";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -166,6 +170,21 @@ function App() {
 
                 {/* Yoshi Drawing Page */}
                 <Route path="/yoshi" element={<Yoshi />} />
+
+                {/* Blocks 3D Page */}
+                <Route path="/unit-blocks" element={<Blocks />} />
+
+                {/* Modern House 3D Page */}
+                <Route path="/modern-house" element={<House />} />
+
+                {/* Kitchen Blockout 3D Page */}
+                <Route path="/kitchen-blockout" element={<Kitchen />} />
+
+                {/* Plant 3D Page */}
+                <Route path="/potted-plant" element={<Plant />} />
+
+                {/* Snowman 3D Page */}
+                <Route path="/snowman" element={<Snowman />} />
             </Routes>
           </main>
           <footer>
