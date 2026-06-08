@@ -1,14 +1,24 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Added useLocation
 import styles from "../styles/navbar.module.css";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation(); // Hook to check the current URL path
 
     const handleNavClick = () => {
         setIsOpen(false);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
+    // Check if the current route is Jeopardy
+    // If you are using HashRouter, location.pathname still returns "/jeopardy"
+    const isJeopardyPage = location.pathname === "/jeopardy";
+
+    // If it's the jeopardy page, render absolutely nothing for the navbar
+    if (isJeopardyPage) {
+        return null;
+    }
 
     return (
         <nav className={styles.navbar}>

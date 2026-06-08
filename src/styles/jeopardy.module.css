@@ -1,0 +1,622 @@
+.container {
+    padding: 40px 20px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: var(--primary-background-color);
+}
+
+.cardCenter {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.headerContent h1 {
+    font-size: 2.2rem;
+    color: var(--secondary-background-color);
+    margin-bottom: 8px;
+}
+
+.headerContent h3 {
+    font-size: 1.2rem;
+    color: var(--third-background-color);
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.form p {
+    color: var(--light-text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.passwordInput {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.passwordInput:focus {
+    border-color: var(--link-color);
+}
+
+.errorText {
+    color: var(--error-color);
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.submitButton {
+    background-color: var(--button-dark-text-color);
+    color: var(--button-light-mode-color);
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.submitButton:hover {
+    background-color: var(--button-hover-light-color);
+    color: #ffffff;
+}
+
+.warningContent {
+    margin: 24px 0;
+    text-align: left;
+}
+
+.warningContent p {
+    color: var(--light-text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* Legal Screen Styles */
+.legalContent {
+    text-align: left;
+    margin: 24px 0;
+}
+
+.legalContent p {
+    color: var(--light-text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.legalList {
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.legalList li {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: var(--light-text-color);
+    list-style-type: square;
+}
+
+.legalFinePrint {
+    font-size: 0.85rem !important;
+    font-style: italic;
+    opacity: 0.7;
+    border-top: 1px dashed #e0e0e0;
+    padding-top: 16px;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.gameContent {
+    text-align: center;
+    width: 100%;
+}
+
+.backButton {
+    background-color: transparent;
+    color: var(--light-text-color);
+    border: 1px solid var(--button-light-mode-color);
+    padding: 8px 16px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: var(--primary-background-color);
+}
+
+.infoCard {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: var(--box-shadow);
+    box-sizing: border-box;
+}
+
+.introText {
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 20px 0;
+    color: var(--light-text-color);
+}
+
+.exampleSection {
+    display: flex;
+    gap: 30px;
+    margin: 30px 0;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .exampleSection {
+        flex-direction: column;
+    }
+}
+
+.exampleImageWrapper {
+    flex: 1;
+    max-width: 350px;
+    width: 100%;
+}
+
+.exampleImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.argumentBox {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.argumentBox h4 {
+    font-size: 1.3rem;
+    color: var(--secondary-background-color);
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.argumentBox ul {
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.argumentBox li {
+    margin-bottom: 8px;
+    list-style-type: none;
+}
+
+.mechanicsBox {
+    background-color: var(--primary-background-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--header-light-color);
+}
+
+.mechanicsBox h4 {
+    color: var(--secondary-background-color);
+    margin-bottom: 6px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.rulesList {
+    text-align: left;
+    margin: 25px 0;
+    padding-left: 20px;
+}
+
+.rulesList li {
+    margin-bottom: 14px;
+    line-height: 1.5;
+    color: var(--light-text-color);
+}
+
+.qrContainer {
+    flex: 1;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.qrImage {
+    width: 100%;
+    height: auto;
+    border: 4px solid var(--secondary-background-color);
+    border-radius: 12px;
+    padding: 8px;
+    background: #ffffff;
+    box-shadow: var(--box-shadow);
+}
+
+.buzzerLink {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+.buzzerExplanation {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.buzzerExplanation li {
+    list-style-type: decimal !important;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    color: var(--light-text-color);
+}
+
+.roomCodeBanner {
+    background: var(--primary-background-color);
+    border: 2px dashed var(--third-background-color);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.roomCodeBanner h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: var(--secondary-background-color);
+}
+
+.roomCodeHighlight {
+    color: var(--link-color);
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: #ffffff;
+    padding: 2px 10px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.roomCodePlaceholder {
+    color: var(--light-text-color);
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 1.3rem !important;
+    margin: 0;
+}
+
+.roomCodeInput {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 6px;
+    border: 2px solid var(--third-background-color);
+    background-color: #ffffff;
+    color: var(--secondary-background-color);
+    margin-bottom: 14px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.roomCodeInput:focus {
+    outline: none;
+    border-color: var(--link-color);
+}
+
+.gameRoomSticky {
+    background: #ffd700;
+    color: #000000;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* SCREEN-HEIGHT RESPONSIVE JEOPARDY COMPONENT OVERRIDES */
+.boardWrapper {
+    width: 100%;
+    max-width: 1300px;
+    height: 90vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.gameHeaderRow {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+}
+
+.gameFooterRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 14px;
+    flex-shrink: 0;
+}
+
+.resetBoardOnlyButton {
+    background: transparent;
+    border: 1px solid var(--link-color, #0076ff);
+    color: var(--link-color, #0076ff);
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.resetBoardOnlyButton:hover {
+    background: var(--link-color, #0076ff);
+    color: #ffffff;
+}
+
+.resetGameTinyButton {
+    background: transparent;
+    border: 1px solid var(--error-color, #ff4d4d);
+    color: var(--error-color, #ff4d4d);
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.resetGameTinyButton:hover {
+    background: var(--error-color, #ff4d4d);
+    color: #ffffff;
+}
+
+.jeopardyGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    width: 100%;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.gridColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+}
+
+.categoryHeaderCard {
+    background-color: var(--secondary-background-color);
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    border: 2px solid var(--third-background-color);
+    letter-spacing: 0.5px;
+    padding: 4px;
+}
+
+.questionSquare {
+    background-color: var(--secondary-background-color);
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: 800;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    border: 2px solid var(--third-background-color);
+    box-shadow: var(--box-shadow);
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.4);
+}
+
+.questionSquare:hover:not(.squareCompleted) {
+    filter: brightness(1.22);
+    transform: translateY(-2px);
+}
+
+/* PREMIUM "VANISHING BLANK CARD" DESIGN TREATMENT */
+.squareCompleted {
+    background-color: var(--secondary-background-color);
+    border: 2px solid var(--third-background-color);
+    opacity: 0.4; /* Slightly soft focus so players immediately know it is spent, but stays perfectly on theme color */
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* HIGH ASPECT DISCUSSION MODAL ARCHITECTURE */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modalCard {
+    background-color: #ffffff;
+    border: 3px solid var(--secondary-background-color);
+    border-radius: 16px;
+    padding: 30px 40px;
+    max-width: 750px;
+    width: 90%;
+    box-shadow: var(--box-shadow);
+    color: var(--secondary-background-color);
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    animation: triggerModalZoom 0.2s ease-out forwards;
+}
+
+.modalScrollContainer {
+    width: 100%;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.modalScrollContainer::-webkit-scrollbar {
+    width: 6px;
+}
+.modalScrollContainer::-webkit-scrollbar-thumb {
+    background: var(--third-background-color);
+    border-radius: 4px;
+}
+
+.modalCard h3 {
+    color: var(--third-background-color);
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.modalCard hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 16px 0;
+}
+
+.modalFoodItem {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--secondary-background-color);
+    margin: 14px 0;
+    letter-spacing: 0.5px;
+}
+
+.modalImageContainer {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    background: var(--primary-background-color);
+}
+
+.modalFoodImage {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.modalPromptText {
+    font-size: 1.3rem;
+    color: var(--light-text-color);
+    font-style: italic;
+    margin-bottom: 24px;
+}
+
+.modalControlActionRow {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dismissCardButton {
+    background-color: transparent;
+    color: var(--light-text-color);
+    border: 1px solid #ccc;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dismissCardButton:hover {
+    background-color: var(--primary-background-color);
+}
+
+.gameMainTitle {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--secondary-background-color);
+    margin: 0;
+    flex-grow: 1; /* Pushes the room code sticker to the far right */
+    text-align: center;
+}
+
+@keyframes triggerModalZoom {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

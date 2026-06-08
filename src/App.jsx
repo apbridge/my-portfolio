@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { HashRouter, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
+import JeopardyPage from './pages/Jeopardy/Jeopardy';
 import GDPage from './pages/GraphicDesignPage';
 import WDPage from './pages/WebsiteDesignPage';
 import UXPage from './pages/UXDesignPage';
@@ -59,6 +60,9 @@ function App() {
             <Routes>
               {/* Home Page */}
               <Route path="/" element={<HomePage />} />
+
+              {/* Jeopardy Page */}
+              <Route path="/jeopardy" element={<JeopardyPage />} />
 
               {/* Graphic Design Page */}
               <Route path="/graphic-design" element={<GDPage />} />

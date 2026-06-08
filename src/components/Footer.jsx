@@ -1,6 +1,17 @@
+import { useLocation } from "react-router-dom"; // Added useLocation
 import styles from "../styles/footer.module.css";
 
 const Footer = () => {
+    const location = useLocation(); // Hook to check the current URL path
+
+    // Check if the current route is Jeopardy
+    const isJeopardyPage = location.pathname === "/jeopardy";
+
+    // Hide the footer entirely on the Jeopardy page
+    if (isJeopardyPage) {
+        return null;
+    }
+
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
