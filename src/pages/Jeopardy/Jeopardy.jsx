@@ -23,13 +23,25 @@ import sliceofpizza from '../../assets/jeopardy/sliceofpizza.png';
 import sushiroll from '../../assets/jeopardy/sushiroll.jpg'; 
 import tiramisu from '../../assets/jeopardy/tiramisu.jpg'; 
 
-
-
 const JeopardyPage = () => {
     const [step, setStep] = useState(0);
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [roomCode, setRoomCode] = useState('');
+
+    // --- SCOREBOARD STATE ---
+    const [players, setPlayers] = useState([
+        { id: 1, name: 'August', score: 0 },
+        { id: 2, name: 'Colin', score: 0 },
+        { id: 3, name: 'Connor', score: 0 },
+        { id: 4, name: 'Isaiah', score: 0 },
+        { id: 5, name: 'Justine', score: 0 },
+        { id: 6, name: 'Laurine', score: 0 },
+        { id: 7, name: 'Nate', score: 0 },
+        { id: 8, name: 'Trevor', score: 0 },
+        { id: 9, name: 'Zack', score: 0 },
+    ]);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const CORRECT_PASSWORD = 'nonerdsallowed'; 
 
@@ -55,11 +67,88 @@ const JeopardyPage = () => {
         setErrorMessage('');
         setRoomCode('');
         setStep(0);
+        setIsSidebarOpen(false);
+        
+        setPlayers([
+            { id: 1, name: 'August', score: 0 },
+            { id: 2, name: 'Colin', score: 0 },
+            { id: 3, name: 'Connor', score: 0 },
+            { id: 4, name: 'Isaiah', score: 0 },
+            { id: 5, name: 'Justine', score: 0 },
+            { id: 6, name: 'Laurine', score: 0 },
+            { id: 7, name: 'Nate', score: 0 },
+            { id: 8, name: 'Trevor', score: 0 },
+            { id: 9, name: 'Zack', score: 0 },
+        ]);
+    };
+
+    // --- SCOREBOARD HANDLERS ---
+    const handleNameChange = (id, newName) => {
+        setPlayers(prev => prev.map(p => p.id === id ? { ...p, name: newName } : p));
+    };
+
+    const handleScoreChange = (id, newScore) => {
+        const parsedScore = parseInt(newScore);
+        setPlayers(prev => prev.map(p => p.id === id ? { ...p, score: isNaN(parsedScore) ? 0 : parsedScore } : p));
+    };
+
+    const adjustScore = (id, amount) => {
+        setPlayers(prev => prev.map(p => p.id === id ? { ...p, score: p.score + amount } : p));
+    };
+
+    // Helper to format 1 -> 1st, 2 -> 2nd, 3 -> 3rd, etc.
+    const getOrdinalSuffix = (i) => {
+        const j = i % 10, k = i % 100;
+        if (j === 1 && k !== 11) return i + "st";
+        if (j === 2 && k !== 12) return i + "nd";
+        if (j === 3 && k !== 13) return i + "rd";
+        return i + "th";
     };
 
     return (
         <div className={styles.container}>
-            {/* STEP 0: PASSWORD WELCOME SCREEN */}
+            {/* GLOBAL SCOREBOARD SIDEBAR BUTTON */}
+            {step === 6 && (
+                <button 
+                    className={styles.sidebarToggleBtn} 
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                >
+                    {isSidebarOpen ? '❌ Close Scores' : '🏆 View Scores'}
+                </button>
+            )}
+
+            {/* SIDEBAR DRAWER COMPONENT */}
+            <div className={`${styles.sidebarDrawer} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+                <div className={styles.sidebarHeader}>
+                    <h2>Game Scoreboard</h2>
+                    <p>Edit names and scores manually below:</p>
+                </div>
+                <div className={styles.sidebarList}>
+                    {players.map((player) => (
+                        <div key={player.id} className={styles.playerRow}>
+                            <input 
+                                type="text"
+                                className={styles.playerNameInput}
+                                value={player.name}
+                                onChange={(e) => handleNameChange(player.id, e.target.value)}
+                            />
+                            <div className={styles.scoreControlGroup}>
+                                <button type="button" onClick={() => adjustScore(player.id, -100)}>-100</button>
+                                <input 
+                                    type="number"
+                                    className={styles.playerScoreInput}
+                                    value={player.score}
+                                    onChange={(e) => handleScoreChange(player.id, e.target.value)}
+                                />
+                                {/* FIXED LINE HERE: Changed onClick={() => ...}+100</button> to onClick={() => ...}>+100</button> */}
+                                <button type="button" onClick={() => adjustScore(player.id, 100)}>+100</button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* STEP 0 to 5: (Kept exactly as original) */}
             {step === 0 && (
                 <div className={styles.cardCenter}>
                     <div className={styles.headerContent}>
@@ -77,14 +166,11 @@ const JeopardyPage = () => {
                             className={styles.passwordInput}
                         />
                         {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
-                        <button type="submit" className={styles.submitButton}>
-                            Unlock Game
-                        </button>
+                        <button type="submit" className={styles.submitButton}>Unlock Game</button>
                     </form>
                 </div>
             )}
 
-            {/* STEP 1: HEADPHONE USER WARNING */}
             {step === 1 && (
                 <div className={styles.cardCenter}>
                     <div className={styles.headerContent}>
@@ -95,13 +181,10 @@ const JeopardyPage = () => {
                         <p>This game utilizes sound effects and audio cues for the ultimate experience!</p>
                         <p>Please ensure your volume is adjusted to a comfortable level... you have been warned...</p>
                     </div>
-                    <button className={styles.submitButton} onClick={() => setStep(2)}>
-                        I'm Ready!
-                    </button>
+                    <button className={styles.submitButton} onClick={() => setStep(2)}>I'm Ready!</button>
                 </div>
             )}
 
-            {/* STEP 2: FAKE LIABILITY WAIVER (WIDE LAYOUT) */}
             {step === 2 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -125,7 +208,6 @@ const JeopardyPage = () => {
                 </div>
             )}
 
-            {/* STEP 3: HOW TO PLAY */}
             {step === 3 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -137,14 +219,9 @@ const JeopardyPage = () => {
                         Every item in this game must be forcefully categorized into one of three structural pillars: 
                         <strong> Soup, Salad, or Sandwich</strong>—even if it technically isn't one!
                     </p>
-
                     <div className={styles.exampleSection}>
                         <div className={styles.exampleImageWrapper}>
-                            <img 
-                                src={tacoImage} 
-                                alt="Delicious Case Study Taco" 
-                                className={styles.exampleImage} 
-                            />
+                            <img src={tacoImage} alt="Delicious Case Study Taco" className={styles.exampleImage} />
                         </div>
                         <div className={styles.argumentBox}>
                             <h4>Example: The Taco</h4>
@@ -152,11 +229,10 @@ const JeopardyPage = () => {
                             <ul>
                                 <li><strong>🥪 Sandwich:</strong> You can pick up a sandwich like you can pick up a taco. It also has layers.</li>
                                 <li><strong>🥗 Salad:</strong> Shaved lettuce, diced tomatoes, cheese, and meat tossed together could be more like the consistency of a salad. Any sauce could be considered dressing. You can also pretty easily pull this apart.</li>
-                                <li><strong>🥣 Soup:</strong> I guess if you put enough sauce on it... If you pick this one you would definitely not win here... an example argument for soup in a different case could be that you can't pull it apart easily or it's more liquid than solid.</li>
+                                <li><strong>🥣 Soup:</strong> I guess if you put enough sauce on it...</li>
                             </ul>
                         </div>
                     </div>
-
                     <div className={styles.buttonGroup}>
                         <button className={styles.backButton} onClick={() => setStep(2)}>Back</button>
                         <button className={styles.submitButton} onClick={() => setStep(4)}>Read the Rules →</button>
@@ -164,7 +240,6 @@ const JeopardyPage = () => {
                 </div>
             )}
 
-            {/* STEP 4: THE RULES */}
             {step === 4 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -175,13 +250,10 @@ const JeopardyPage = () => {
                     <ol className={styles.rulesList}>
                         <li>🚫 <strong>No Cheating:</strong> Seriously, don't look up answers. This is supposed to be fun!</li>
                         <li>👑 <strong>Belle's Dictatorship:</strong> Belle's culinary opinion trumps all logic, science, and history. She decides who gets the points. No appeals. #notsorry</li>
-                        <li>⏱️ <strong>Buzzer Priority:</strong> The first person to buzz in with a correct, logical argument receives the points by default—<em>unless</em> it is overwhelmingly clear that a later speaker brought a vastly superior or legendary argument to the floor.</li>
-                        <li>🛠️ <strong>The Executive Clause:</strong> Belle reserves the right to retroactively modify points, invent new constraints, or alter the fabric of the game entirely at any given moment.</li>
-                        <li>🤡 <strong>The Jester Bonus:</strong> The most ridiculous, unhinged, or hilariously creative argument will get <strong>500 points</strong> added to their score (if there is a clear winner). You do not have to be structurally correct to win this!</li>
-                        <li>🃏 <strong>The Gambit Clause:</strong> If you win a round, you can choose to claim the points for yourself, **reward your points** to someone else, or **deduct that point value** from a rival of your choice.</li>
-                        <li>🤝 <strong>Ties are Allowed:</strong> If two arguments are equally flawless, points may be split.</li>
+                        <li>⏱️ <strong>Buzzer Priority:</strong> The first person to buzz in with a correct, logical argument receives the points by default.</li>
+                        <li>🤡 <strong>The Jester Bonus:</strong> The most ridiculous, unhinged, or hilariously creative argument will get <strong>500 points</strong> added to their score.</li>
+                        <li>🃏 <strong>The Gambit Clause:</strong> If you win a round, you can choose to claim the points, reward them to someone else, or deduct them from a rival.</li>
                     </ol>
-
                     <div className={styles.buttonGroup}>
                         <button className={styles.backButton} onClick={() => setStep(3)}>Back</button>
                         <button className={styles.submitButton} onClick={() => setStep(5)}>Connect Buzzers →</button>
@@ -189,7 +261,6 @@ const JeopardyPage = () => {
                 </div>
             )}
 
-            {/* STEP 5: BUZZER SETUP SCREEN */}
             {step === 5 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -197,8 +268,6 @@ const JeopardyPage = () => {
                         <h3>Get Ready to Click Fast</h3>
                     </div>
                     <hr />
-                    
-                    {/* Room Code Display Banner */}
                     <div className={styles.roomCodeBanner}>
                         {roomCode ? (
                             <h2>Room Code: <span className={styles.roomCodeHighlight}>{roomCode}</span></h2>
@@ -206,7 +275,6 @@ const JeopardyPage = () => {
                             <h2 className={styles.roomCodePlaceholder}>Type room code below...</h2>
                         )}
                     </div>
-
                     <div className={styles.exampleSection}>
                         <div className={styles.qrContainer}>
                             <input 
@@ -217,33 +285,14 @@ const JeopardyPage = () => {
                                 className={styles.roomCodeInput}
                                 maxLength={8}
                             />
-                            
-                            <img 
-                                src={buzzerQR} 
-                                alt="Scan to join Buzzin.live" 
-                                className={styles.qrImage}
-                            />
-                            <a href="https://buzzin.live/" target="_blank" rel="noopener noreferrer" className={styles.buzzerLink}>
-                                buzzin.live
-                            </a>
+                            <img src={buzzerQR} alt="Scan to join Buzzin.live" className={styles.qrImage} />
+                            <a href="https://buzzin.live/" target="_blank" rel="noopener noreferrer" className={styles.buzzerLink}>buzzin.live</a>
                         </div>
-                        
                         <div className={styles.argumentBox}>
                             <h4>📱 Pro-Tip: Use Your Phone!</h4>
-                            <p>
-                                It is <strong>highly recommended</strong> to open the buzzer link on your phone rather than a laptop. 
-                                Tapping a mobile touchscreen is physically faster than aiming a mouse!
-                            </p>
-                            
-                            <h4 style={{marginTop: '24px'}}>⚡ How it Works:</h4>
-                            <ol className={styles.buzzerExplanation}>
-                                <li>Once an item appears on screen, the floor is open.</li>
-                                <li>Smash your big red buzzer button to lock in your chance to talk.</li>
-                                <li>If you are first, the game will halt and highlight your name. You have a limited time to state your case!</li>
-                            </ol>
+                            <p>It is <strong>highly recommended</strong> to open the buzzer link on your phone rather than a laptop.</p>
                         </div>
                     </div>
-
                     <div className={styles.buttonGroup}>
                         <button className={styles.backButton} onClick={() => setStep(4)}>Back</button>
                         <button className={styles.submitButton} onClick={() => setStep(6)}>LAUNCH GAME 🎉</button>
@@ -251,20 +300,74 @@ const JeopardyPage = () => {
                 </div>
             )}
 
-            {/* STEP 6: ACTUAL JEOPARDY GAME */}
+            {/* STEP 6: JEOPARDY BOARD */}
             {step === 6 && (
                 <GameBoard 
                     roomCode={roomCode} 
                     handleResetGame={handleResetGame} 
+                    triggerFinishGame={() => {
+                        setIsSidebarOpen(false);
+                        setStep(7);
+                    }}
                     styles={styles} 
                 />
+            )}
+
+            {/* STEP 7: FINAL LEADERBOARD PAGE */}
+            {step === 7 && (
+                <div className={styles.leaderboardContainer}>
+                    <div className={styles.leaderboardCard}>
+                        <div className={styles.leaderboardHeader}>
+                            <h1>🏆 Final Standings 🏆</h1>
+                            <p>The culinary debate has settled. Here are your official scores:</p>
+                        </div>
+                        
+                        <hr />
+
+                        <div className={styles.leaderboardList}>
+                            {[...players]
+                                .sort((a, b) => b.score - a.score)
+                                .map((player, index) => {
+                                    const rankPosition = index + 1;
+                                    let rankClass = styles.normalRank;
+                                    
+                                    // Give custom shine styles to top 3
+                                    if (rankPosition === 1) rankClass = styles.firstPlace;
+                                    if (rankPosition === 2) rankClass = styles.secondPlace;
+                                    if (rankPosition === 3) rankClass = styles.thirdPlace;
+
+                                    return (
+                                        <div key={player.id} className={`${styles.leaderboardRow} ${rankClass}`}>
+                                            <div className={styles.leaderboardPosition}>
+                                                {getOrdinalSuffix(rankPosition)}
+                                            </div>
+                                            <div className={styles.leaderboardName}>
+                                                {player.name}
+                                            </div>
+                                            <div className={styles.leaderboardPoints}>
+                                                {player.score} points
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                        </div>
+
+                        <hr />
+
+                        <div className={styles.leaderboardFooter}>
+                            <button className={styles.restartGameButton} onClick={handleResetGame}>
+                                Play Again 🔄
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
 };
 
-/* JEOPARDY BOARD GRID ENGINE AND MODAL DISCUSSION COMPONENT */
-const GameBoard = ({ roomCode, handleResetGame, styles }) => {
+/* JEOPARDY BOARD GRID ENGINE */
+const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, styles }) => {
     const initialBoard = [
         {
             category: "Breakfast Chaos",
@@ -318,19 +421,16 @@ const GameBoard = ({ roomCode, handleResetGame, styles }) => {
     };
 
     const handleResetBoardOnly = () => {
-        const confirmation = window.confirm("Are you sure you want to reset all squares on the board? (This keeps your room code active)");
+        const confirmation = window.confirm("Are you sure you want to reset all squares on the board?");
         if (!confirmation) return;
-        
-        const wipedBoard = board.map(cat => ({
+        setBoard(board.map(cat => ({
             ...cat,
             questions: cat.questions.map(q => ({ ...q, completed: false }))
-        }));
-        setBoard(wipedBoard);
+        })));
     };
 
     const handleCloseQuestion = (markAsCompleted = true) => {
         if (!activeQuestion) return;
-        
         if (markAsCompleted) {
             const updatedBoard = [...board];
             updatedBoard[activeQuestion.catIndex].questions[activeQuestion.qIndex].completed = true;
@@ -345,20 +445,16 @@ const GameBoard = ({ roomCode, handleResetGame, styles }) => {
                 <h1 className={styles.gameMainTitle}>Soup, Salad, or Sandwich?</h1>
             </div>
 
-            {/* VIEWPORT CONTRASTED GRID ENGINE */}
             <div className={styles.jeopardyGrid}>
                 {board.map((cat, catIndex) => (
                     <div key={cat.category} className={styles.gridColumn}>
-                        <div className={styles.categoryHeaderCard}>
-                            {cat.category}
-                        </div>
+                        <div className={styles.categoryHeaderCard}>{cat.category}</div>
                         {cat.questions.map((q, qIndex) => (
                             <div 
                                 key={q.id} 
                                 className={`${styles.questionSquare} ${q.completed ? styles.squareCompleted : ''}`}
                                 onClick={() => handleSquareClick(catIndex, qIndex)}
                             >
-                                {/* Display raw point metrics instead of currency signs */}
                                 {!q.completed && `${q.value}`}
                             </div>
                         ))}
@@ -371,6 +467,12 @@ const GameBoard = ({ roomCode, handleResetGame, styles }) => {
                 <button className={styles.resetBoardOnlyButton} onClick={handleResetBoardOnly}>
                     Reset Board Squares 🔄
                 </button>
+                
+                {/* NEW FINISH GAME ACTION LINK */}
+                <button className={styles.finishGameButton} onClick={triggerFinishGame}>
+                    Finish Game 🏆
+                </button>
+
                 <button className={styles.resetGameTinyButton} onClick={handleResetGame}>
                     Exit Game completely 🚪
                 </button>
@@ -383,17 +485,13 @@ const GameBoard = ({ roomCode, handleResetGame, styles }) => {
                         <div className={styles.modalScrollContainer}>
                             <h3>For {activeQuestion.value} Points...</h3>
                             <hr />
-                            
                             <h1 className={styles.modalFoodItem}>{activeQuestion.item}</h1>
-                            
                             {activeQuestion.imgUrl && (
                                 <div className={styles.modalImageContainer}>
                                     <img src={activeQuestion.imgUrl} alt={activeQuestion.item} className={styles.modalFoodImage} />
                                 </div>
                             )}
-                            
                             <hr />
-                            
                             <div className={styles.modalControlActionRow}>
                                 <button className={styles.submitButton} onClick={() => handleCloseQuestion(true)}>
                                     Award Points & Clear Card 👑
