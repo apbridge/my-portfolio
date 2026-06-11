@@ -213,6 +213,7 @@
     flex: 1;
     max-width: 280px;
     width: 100%;
+    margin-top: 45px;
 }
 
 .exampleImage {
@@ -569,28 +570,12 @@
 /* ==========================================================================
    SCOREBOARD SIDEBAR DRAWER LAYOUT
    ========================================================================== */
-.sidebarToggleBtn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 10000;
-    background: #2d3748;
-    color: #ffffff;
-    border: none;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-}
-
-.sidebarToggleBtn:hover {
-    background: #1a202c;
-}
-
+/* ==========================================================================
+   SCOREBOARD SIDEBAR DRAWER LAYOUT (FIXED)
+   ========================================================================== */
 .sidebarDrawer {
-    position: fixed;
+    /* Kept as fixed so it locks to the right side of the screen */
+    position: fixed; 
     top: 0;
     right: -320px;
     width: 320px;
@@ -604,6 +589,41 @@
     flex-direction: column;
     box-sizing: border-box;
     color: #1a202c;
+    
+    /* REMOVED position: relative; 
+       Because position: fixed automatically acts as an absolute anchor anyway! */
+}
+
+.sidebarOpen {
+    right: 0; /* Slides into view when open */
+}
+
+.sidebarToggleBtn {
+    /* Absolutely positioned relative to the .sidebarDrawer container */
+    position: absolute; 
+    top: 10px;
+    
+    /* Pushes the button out to the left edge of the sidebar panel */
+    left: 0;
+    transform: translateX(-100%);
+    
+    /* Ensures it sits cleanly on top of the drawer */
+    z-index: 9999; 
+    
+    background: #2d3748;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 4px 0 0 4px; /* Clean tab corners on the left edge */
+    cursor: pointer;
+    box-shadow: -4px 4px 6px rgba(0,0,0,0.15);
+    white-space: nowrap; 
+}
+
+.sidebarToggleBtn:hover {
+    background: #1a202c;
 }
 
 .sidebarOpen {
@@ -850,4 +870,154 @@
 
 .restartGameButton:hover {
     background: #1a202c;
+}
+/* ==========================================================================
+   PRELOADER GRAPHICS & BARS
+   ========================================================================== */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e2e8f0;
+    border-top: 5px solid #2d3748;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spinPreloader 1s linear infinite;
+}
+
+@keyframes spinPreloader {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.progressBarBg {
+    width: 100%;
+    background-color: #e2e8f0;
+    border-radius: 10px;
+    height: 8px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.progressBarFill {
+    height: 100%;
+    background-color: #2d3748;
+    width: 0%;
+    transition: width 0.1s ease-out;
+}
+
+/* --- CINEMATIC LEADERBOARD TRANSITIONS --- */
+.fadeOut {
+    animation: postGameFadeOut 1.5s ease-out forwards;
+}
+
+.fadeIn {
+    animation: postGameFadeIn 1.5s ease-in forwards;
+}
+
+@keyframes postGameFadeOut {
+    0% { opacity: 1; transform: scale(1); filter: blur(0px); }
+    100% { opacity: 0; transform: scale(0.98); filter: blur(4px); }
+}
+
+@keyframes postGameFadeIn {
+    0% { opacity: 0; transform: scale(1.02); filter: blur(4px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0px); }
+}
+
+/* --- SAD HAMSTER FULLSCREEN OVERLAY --- */
+.hamsterOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark backdrop */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Forces it above grid lines & open score sidebars */
+}
+
+.hamsterContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hamsterImageGraphic {
+    max-height: 65vh; /* Responsive constraint so it fits beautifully inside view heights */
+    width: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.hamsterTextHeading {
+    color: #ffffff;
+    font-size: 3rem;
+    margin-top: 20px;
+    font-family: sans-serif;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+.closeHamsterButton {
+    position: absolute;
+    top: 25px;       /* Spacing from the top edge */
+    left: 25px;      /* Spacing from the LEFT edge instead of right */
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10000;  /* Keeps it above the dark backdrop */
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.closeHamsterButton:hover {
+    background-color: #c53030;
+    transform: scale(1.05);
+}
+
+.closeHamsterButton:active {
+    transform: scale(0.95);
+}
+
+/* Style for the new gameboard footer button */
+.sadHamsterMemeButton {
+    background-color: #4a5568;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sadHamsterMemeButton:hover {
+    background-color: #2d3748;
+}
+
+.modalSoundbarRow {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Make sure modal buttons shrink nicely if screen space is tight */
+.modalSoundbarRow button {
+    font-size: 1.3rem !important;
+    padding: 6px 12px !important;
+    min-width: 45px;
+    height: 40px;
 }

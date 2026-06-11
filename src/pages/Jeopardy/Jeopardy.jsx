@@ -22,12 +22,51 @@ import poutine from '../../assets/jeopardy/poutine.jpg';
 import sliceofpizza from '../../assets/jeopardy/sliceofpizza.png'; 
 import sushiroll from '../../assets/jeopardy/sushiroll.jpg'; 
 import tiramisu from '../../assets/jeopardy/tiramisu.jpg'; 
+import tada from '../../assets/jeopardy/sounds/cartoon-tada-sound.mp3';
+import elevator from '../../assets/jeopardy/sounds/elevator-music.mp3';
+import kahoot from '../../assets/jeopardy/sounds/kahoot-lobby-music.mp3';
+import android from '../../assets/jeopardy/sounds/loud-android-sound.mp3';
+import marioKartEnd from '../../assets/jeopardy/sounds/mario-kart-race-end-sound.mp3';
+import sadHamsterSound from '../../assets/jeopardy/sounds/sad-hamster-song.mp3';
+import sadTrombone from '../../assets/jeopardy/sounds/sad-trombone.mp3';
+import sadSpongebob from '../../assets/jeopardy/sounds/spongebob-sad.mp3';
+import wow from '../../assets/jeopardy/sounds/wow-sound.mp3';
+import sadHamsterImage from '../../assets/jeopardy/sad-hamster.png';
 
 const JeopardyPage = () => {
     const [step, setStep] = useState(0);
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [roomCode, setRoomCode] = useState('');
+
+    // --- AUDIO CONTROLLER STATE ---
+    const [currentMusic, setCurrentMusic] = useState(null);
+
+    // --- CINEMATIC LEADERBOARD TRANSITION STATE ---
+    const [transitionStatus, setTransitionStatus] = useState('idle'); 
+
+    // --- SAD HAMSTER OVERLAY STATE ---
+    const [showSadHamster, setShowSadHamster] = useState(false);
+    const [hamsterAudioInstance, setHamsterAudioInstance] = useState(null);
+
+    // --- WOW SOUND INTERRUPT CONTROLLERS ---
+    const triggerWowSoundOnly = () => {
+        // Lower background elevator loop volume so the wow hits clean
+        if (currentMusic) currentMusic.volume = 0.02;
+
+        const wowAudio = new Audio(wow);
+        wowAudio.volume = 1.0;
+
+        wowAudio.onended = () => {
+            if (currentMusic) currentMusic.volume = 0.2; // Restore ambient track volume
+        };
+
+        wowAudio.play().catch(err => console.log("Wow playback blocked:", err));
+    };
+
+    // --- PRELOAD ASSET ENGINE STATE ---
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+    const [preloadProgress, setPreloadProgress] = useState(0);
 
     // --- SCOREBOARD STATE ---
     const [players, setPlayers] = useState([
@@ -45,10 +84,50 @@ const JeopardyPage = () => {
 
     const CORRECT_PASSWORD = 'nonerdsallowed'; 
 
+    // --- AUDIO HANDLING ENGINE ---
+    const playSound = (audioSrc, volumeLevel = 1.0) => {
+        const audio = new Audio(audioSrc);
+        audio.volume = volumeLevel;
+        audio.play().catch(err => console.log("Audio play blocked or failed:", err));
+        return audio;
+    };
+
+    useEffect(() => {
+        return () => {
+            if (currentMusic) currentMusic.pause();
+            if (hamsterAudioInstance) hamsterAudioInstance.pause();
+        };
+    }, [currentMusic, hamsterAudioInstance]);
+
     useEffect(() => {
         const originalMinHeight = document.body.style.minHeight;
         document.body.style.minHeight = '100vh';
         return () => { document.body.style.minHeight = originalMinHeight; };
+    }, []);
+
+    // --- PRELOAD GRAPHICS ---
+    useEffect(() => {
+        const imageList = [
+            tacoImage, buzzerQR, cerealwithmilk, beansontoast, beefwellington, 
+            biscuitsandgravy, breadbowl, cheesecake, chickenandwaffles, chipsandsalsa, 
+            curry, dairyqueenblizzard, jellydoughnut, lasagna, omelette, parfait, 
+            pierogidumpling, popsicle, poutine, sliceofpizza, sushiroll, tiramisu, sadHamsterImage
+        ];
+
+        let loadedCount = 0;
+        imageList.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedCount++;
+                setPreloadProgress(Math.round((loadedCount / imageList.length) * 100));
+                if (loadedCount === imageList.length) setImagesLoaded(true);
+            };
+            img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === imageList.length) setImagesLoaded(true);
+            };
+        });
     }, []);
 
     const handlePasswordSubmit = (e) => {
@@ -63,11 +142,16 @@ const JeopardyPage = () => {
     };
 
     const handleResetGame = () => {
+        if (currentMusic) currentMusic.pause();
+        if (hamsterAudioInstance) hamsterAudioInstance.pause();
         setPassword('');
         setErrorMessage('');
         setRoomCode('');
         setStep(0);
         setIsSidebarOpen(false);
+        setTransitionStatus('idle');
+        setShowSadHamster(false);
+        setHamsterAudioInstance(null);
         
         setPlayers([
             { id: 1, name: 'August', score: 0 },
@@ -96,7 +180,6 @@ const JeopardyPage = () => {
         setPlayers(prev => prev.map(p => p.id === id ? { ...p, score: p.score + amount } : p));
     };
 
-    // Helper to format 1 -> 1st, 2 -> 2nd, 3 -> 3rd, etc.
     const getOrdinalSuffix = (i) => {
         const j = i % 10, k = i % 100;
         if (j === 1 && k !== 11) return i + "st";
@@ -105,9 +188,99 @@ const JeopardyPage = () => {
         return i + "th";
     };
 
+    const switchAmbientMusic = (nextTrackSrc, volume = 0.2) => {
+        if (currentMusic) currentMusic.pause();
+        const newTrack = playSound(nextTrackSrc, volume);
+        newTrack.loop = true;
+        setCurrentMusic(newTrack);
+    };
+
+    const handleAudioWarningConfirm = () => {
+        playSound(android);
+        setStep(2);
+        const ambientTracks = playSound(elevator, 0.2);
+        ambientTracks.loop = true;
+        setCurrentMusic(ambientTracks);
+    };
+
+    const handleFinishGameAndPlayMusic = () => {
+        if (currentMusic) currentMusic.pause();
+        if (hamsterAudioInstance) {
+            hamsterAudioInstance.pause();
+            setShowSadHamster(false);
+        }
+
+        const endingFanfare = new Audio(marioKartEnd);
+        endingFanfare.volume = 1.0;
+        setCurrentMusic(endingFanfare);
+        endingFanfare.play().catch(err => console.log("Audio play failed:", err));
+
+        setTransitionStatus('fading-out');
+
+        setTimeout(() => {
+            setIsSidebarOpen(false);
+            setStep(7);
+            setTransitionStatus('fading-in');
+        }, 1500);
+    };
+
+    // --- SAD HAMSTER INTERRUPT CONTROLLERS ---
+    const triggerSadHamsterMeme = () => {
+        // Lower background elevator loop volume completely so the violin hits harder
+        if (currentMusic) currentMusic.volume = 0.02;
+
+        const hamsterAudio = new Audio(sadHamsterSound);
+        hamsterAudio.volume = 1.0;
+        setHamsterAudioInstance(hamsterAudio);
+        setShowSadHamster(true);
+
+        hamsterAudio.onended = () => {
+            setShowSadHamster(false);
+            if (currentMusic) currentMusic.volume = 0.2; // Restore regular volume
+        };
+
+        hamsterAudio.play().catch(err => console.log("Meme playback blocked:", err));
+    };
+
+    const dismissSadHamsterImmediately = () => {
+        if (hamsterAudioInstance) {
+            hamsterAudioInstance.pause();
+        }
+        setShowSadHamster(false);
+        if (currentMusic) currentMusic.volume = 0.2; // Restore regular volume
+    };
+
+    const getTransitionClass = () => {
+        if (transitionStatus === 'fading-out') return styles.fadeOut;
+        if (transitionStatus === 'fading-in') return styles.fadeIn;
+        return '';
+    };
+
+    if (!imagesLoaded) {
+        return (
+            <div className={styles.container}>
+                <div className={styles.cardCenter}>
+                    <div className={styles.spinner}></div>
+                    <h2 style={{ marginTop: '20px', color: '#1a202c' }}>
+                        Loading Delicious Assets...
+                    </h2>
+                    <p style={{ color: '#4a5568', fontSize: '0.95rem' }}>
+                        Preloading culinary graphics... ({preloadProgress}%)
+                    </p>
+                    <div className={styles.progressBarBg}>
+                        <div className={styles.progressBarFill} style={{ width: `${preloadProgress}%` }}></div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className={styles.container}>
-            {/* GLOBAL SCOREBOARD SIDEBAR BUTTON */}
+        <div className={`${styles.container} ${getTransitionClass()}`}>
+           {/* SIDEBAR DRAWER COMPONENT */}
+        <div className={`${styles.sidebarDrawer} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+            
+            {/* BUTTON IS NOW NESTED INSIDE THE DRAWER */}
             {step === 6 && (
                 <button 
                     className={styles.sidebarToggleBtn} 
@@ -117,43 +290,41 @@ const JeopardyPage = () => {
                 </button>
             )}
 
-            {/* SIDEBAR DRAWER COMPONENT */}
-            <div className={`${styles.sidebarDrawer} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
-                <div className={styles.sidebarHeader}>
-                    <h2>Game Scoreboard</h2>
-                    <p>Edit names and scores manually below:</p>
-                </div>
-                <div className={styles.sidebarList}>
-                    {players.map((player) => (
-                        <div key={player.id} className={styles.playerRow}>
-                            <input 
-                                type="text"
-                                className={styles.playerNameInput}
-                                value={player.name}
-                                onChange={(e) => handleNameChange(player.id, e.target.value)}
-                            />
-                            <div className={styles.scoreControlGroup}>
-                                <button type="button" onClick={() => adjustScore(player.id, -100)}>-100</button>
-                                <input 
-                                    type="number"
-                                    className={styles.playerScoreInput}
-                                    value={player.score}
-                                    onChange={(e) => handleScoreChange(player.id, e.target.value)}
-                                />
-                                {/* FIXED LINE HERE: Changed onClick={() => ...}+100</button> to onClick={() => ...}>+100</button> */}
-                                <button type="button" onClick={() => adjustScore(player.id, 100)}>+100</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div className={styles.sidebarHeader}>
+                <h2>Game Scoreboard</h2>
+                <p>Edit names and scores manually below:</p>
             </div>
+            
+            <div className={styles.sidebarList}>
+                {players.map((player) => (
+                    <div key={player.id} className={styles.playerRow}>
+                        <input 
+                            type="text"
+                            className={styles.playerNameInput}
+                            value={player.name}
+                            onChange={(e) => handleNameChange(player.id, e.target.value)}
+                        />
+                        <div className={styles.scoreControlGroup}>
+                            <button type="button" onClick={() => adjustScore(player.id, -100)}>-100</button>
+                            <input 
+                                type="number"
+                                className={styles.playerScoreInput}
+                                value={player.score}
+                                onChange={(e) => handleScoreChange(player.id, e.target.value)}
+                            />
+                            <button type="button" onClick={() => adjustScore(player.id, 100)}>+100</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
 
-            {/* STEP 0 to 5: (Kept exactly as original) */}
+            {/* STEP 0: LOGIN SPLASH SCREEN */}
             {step === 0 && (
                 <div className={styles.cardCenter}>
                     <div className={styles.headerContent}>
                         <h1>Welcome to Soup, Salad, or Sandwich!</h1>
-                        <h3>By Belle (and AI)</h3>
+                        <h3>By Belle (and AI)<br/> ~ Fueled by Taco Bell ~</h3>
                     </div>
                     <hr />
                     <form onSubmit={handlePasswordSubmit} className={styles.form}>
@@ -171,6 +342,7 @@ const JeopardyPage = () => {
                 </div>
             )}
 
+            {/* STEP 1: WARNING */}
             {step === 1 && (
                 <div className={styles.cardCenter}>
                     <div className={styles.headerContent}>
@@ -181,10 +353,11 @@ const JeopardyPage = () => {
                         <p>This game utilizes sound effects and audio cues for the ultimate experience!</p>
                         <p>Please ensure your volume is adjusted to a comfortable level... you have been warned...</p>
                     </div>
-                    <button className={styles.submitButton} onClick={() => setStep(2)}>I'm Ready!</button>
+                    <button className={styles.submitButton} onClick={handleAudioWarningConfirm}>I'm Ready!</button>
                 </div>
             )}
 
+            {/* STEP 2: RELEASE */}
             {step === 2 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -202,12 +375,19 @@ const JeopardyPage = () => {
                         <p className={styles.legalFinePrint}>Play at your own risk. Belle's decisions are absolute, legally binding within this room, and non-negotiable.</p>
                     </div>
                     <div className={styles.buttonGroup}>
-                        <button className={styles.backButton} onClick={() => setStep(1)}>Back</button>
+                        <button className={styles.backButton} onClick={() => {
+                            if (currentMusic) {
+                                currentMusic.pause();
+                                setCurrentMusic(null);
+                            }
+                            setStep(1);
+                        }}>Back</button>
                         <button className={styles.submitButton} onClick={() => setStep(3)}>Next: How to Play →</button>
                     </div>
                 </div>
             )}
 
+            {/* STEP 3: LESSON */}
             {step === 3 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -235,11 +415,15 @@ const JeopardyPage = () => {
                     </div>
                     <div className={styles.buttonGroup}>
                         <button className={styles.backButton} onClick={() => setStep(2)}>Back</button>
-                        <button className={styles.submitButton} onClick={() => setStep(4)}>Read the Rules →</button>
+                        <button className={styles.submitButton} onClick={() => {
+                            switchAmbientMusic(kahoot, 0.2);
+                            setStep(4);
+                        }}>Read the Rules →</button>
                     </div>
                 </div>
             )}
 
+            {/* STEP 4: SYSTEM RULES */}
             {step === 4 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -250,17 +434,21 @@ const JeopardyPage = () => {
                     <ol className={styles.rulesList}>
                         <li>🚫 <strong>No Cheating:</strong> Seriously, don't look up answers. This is supposed to be fun!</li>
                         <li>👑 <strong>Belle's Dictatorship:</strong> Belle's culinary opinion trumps all logic, science, and history. She decides who gets the points. No appeals. #notsorry</li>
-                        <li>⏱️ <strong>Buzzer Priority:</strong> The first person to buzz in with a correct, logical argument receives the points by default.</li>
+                        <li>⏱️ <strong>Buzzer Priority:</strong> The first person to buzz in with a correct, logical argument receives the points by default. UNLESS, it is overwhelmingly clear that a later speaker brought a vastly superior or legendary argument to the floor.</li>
                         <li>🤡 <strong>The Jester Bonus:</strong> The most ridiculous, unhinged, or hilariously creative argument will get <strong>500 points</strong> added to their score.</li>
-                        <li>🃏 <strong>The Gambit Clause:</strong> If you win a round, you can choose to claim the points, reward them to someone else, or deduct them from a rival.</li>
+                        <li>🃏 <strong>The Gambit Clause:</strong> If you win a round, you can choose to claim the points, reward them to someone else, or deduct them from a rival. However, if someone is already below 0, players cannot keep reducing that players points.</li>
                     </ol>
                     <div className={styles.buttonGroup}>
-                        <button className={styles.backButton} onClick={() => setStep(3)}>Back</button>
+                        <button className={styles.backButton} onClick={() => {
+                            switchAmbientMusic(elevator, 0.2);
+                            setStep(3);
+                        }}>Back</button>
                         <button className={styles.submitButton} onClick={() => setStep(5)}>Connect Buzzers →</button>
                     </div>
                 </div>
             )}
 
+            {/* STEP 5: SETUP CODE */}
             {step === 5 && (
                 <div className={styles.infoCard}>
                     <div className={styles.headerContent}>
@@ -295,25 +483,38 @@ const JeopardyPage = () => {
                     </div>
                     <div className={styles.buttonGroup}>
                         <button className={styles.backButton} onClick={() => setStep(4)}>Back</button>
-                        <button className={styles.submitButton} onClick={() => setStep(6)}>LAUNCH GAME 🎉</button>
+                        <button className={styles.submitButton} onClick={() => {
+                            if (currentMusic) {
+                                currentMusic.pause();
+                                setCurrentMusic(null);
+                            }
+                            setStep(6);
+                        }}>LAUNCH GAME 🎉</button>
                     </div>
                 </div>
             )}
 
-            {/* STEP 6: JEOPARDY BOARD */}
+          {/* STEP 6: GRID CANVAS */}
             {step === 6 && (
                 <GameBoard 
                     roomCode={roomCode} 
                     handleResetGame={handleResetGame} 
-                    triggerFinishGame={() => {
-                        setIsSidebarOpen(false);
-                        setStep(7);
+                    triggerFinishGame={handleFinishGameAndPlayMusic}
+                    triggerSadHamster={triggerSadHamsterMeme}
+                    triggerWow={triggerWowSoundOnly}
+                    
+                    /* Pass the new button sound engines down */
+                    triggerTada={() => playSound(tada, 1.0)}
+                    triggerSadFail={() => {
+                        const negativeSounds = [sadTrombone, sadSpongebob];
+                        const chosenSound = negativeSounds[Math.floor(Math.random() * negativeSounds.length)];
+                        playSound(chosenSound, 1.0);
                     }}
                     styles={styles} 
                 />
             )}
 
-            {/* STEP 7: FINAL LEADERBOARD PAGE */}
+            {/* STEP 7: WINNERS SHEET */}
             {step === 7 && (
                 <div className={styles.leaderboardContainer}>
                     <div className={styles.leaderboardCard}>
@@ -321,9 +522,7 @@ const JeopardyPage = () => {
                             <h1>🏆 Final Standings 🏆</h1>
                             <p>The culinary debate has settled. Here are your official scores:</p>
                         </div>
-                        
                         <hr />
-
                         <div className={styles.leaderboardList}>
                             {[...players]
                                 .sort((a, b) => b.score - a.score)
@@ -331,7 +530,6 @@ const JeopardyPage = () => {
                                     const rankPosition = index + 1;
                                     let rankClass = styles.normalRank;
                                     
-                                    // Give custom shine styles to top 3
                                     if (rankPosition === 1) rankClass = styles.firstPlace;
                                     if (rankPosition === 2) rankClass = styles.secondPlace;
                                     if (rankPosition === 3) rankClass = styles.thirdPlace;
@@ -351,9 +549,7 @@ const JeopardyPage = () => {
                                     );
                                 })}
                         </div>
-
                         <hr />
-
                         <div className={styles.leaderboardFooter}>
                             <button className={styles.restartGameButton} onClick={handleResetGame}>
                                 Play Again 🔄
@@ -362,12 +558,32 @@ const JeopardyPage = () => {
                     </div>
                 </div>
             )}
+
+            {/* INDEPENDENT FULL SCREEN MEME OVERLAY */}
+            {showSadHamster && (
+                <div className={styles.hamsterOverlay}>
+                    <button 
+                        className={styles.closeHamsterButton} 
+                        onClick={dismissSadHamsterImmediately}
+                    >
+                        ❌ Close
+                    </button>
+                    <div className={styles.hamsterContainer}>
+                        <img 
+                            src={sadHamsterImage} 
+                            alt="Womp Womp Hamster" 
+                            className={styles.hamsterImageGraphic} 
+                        />
+                        <h1 className={styles.hamsterTextHeading}>Womp Womp...</h1>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
 /* JEOPARDY BOARD GRID ENGINE */
-const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, styles }) => {
+const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, triggerSadHamster, triggerWow, triggerTada, triggerSadFail, styles }) => {
     const initialBoard = [
         {
             category: "Breakfast Chaos",
@@ -462,13 +678,29 @@ const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, styles }) => 
                 ))}
             </div>
 
-            {/* CONTROL PANEL UTILITIES POSITIONED UNDERNEATH THE BOARD */}
             <div className={styles.gameFooterRow}>
                 <button className={styles.resetBoardOnlyButton} onClick={handleResetBoardOnly}>
                     Reset Board Squares 🔄
                 </button>
                 
-                {/* NEW FINISH GAME ACTION LINK */}
+                {/* BRAND NEW MEME TRIGGER LINKED NEXT TO FINISH BUTTON */}
+                <button className={styles.sadHamsterMemeButton} onClick={triggerSadHamster}>
+                    💔
+                </button>
+
+                {/* BRAND NEW WOW SOUND TRIGGER */}
+                <button className={styles.wowSoundButton} onClick={triggerWow}>
+                    😮
+                </button>
+
+                <button className={styles.sadFailButton} onClick={triggerSadFail} title="Sad Fail (Random)">
+                    📉
+                </button>
+
+                <button className={styles.tadaButton} onClick={triggerTada} title="Celebration!">
+                    🎉
+                </button>
+
                 <button className={styles.finishGameButton} onClick={triggerFinishGame}>
                     Finish Game 🏆
                 </button>
@@ -478,7 +710,6 @@ const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, styles }) => 
                 </button>
             </div>
 
-            {/* FULLSCREEN DISCUSSION MODAL */}
             {activeQuestion && (
                 <div className={styles.modalOverlay}>
                     <div className={styles.modalCard}>
@@ -498,6 +729,21 @@ const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, styles }) => 
                                 </button>
                                 <button className={styles.dismissCardButton} onClick={() => handleCloseQuestion(false)}>
                                     Return to Board (Keep Square Active) ↩️
+                                </button>
+                            </div>
+                            {/* FLOATING QUICK-SOUNDBAR FOR LIVE QUESTION DRAMA */}
+                            <div className={styles.modalSoundbarRow}>
+                                <button className={styles.sadHamsterMemeButton} onClick={triggerSadHamster} title="Sad Hamster">
+                                    💔
+                                </button>
+                                <button className={styles.wowSoundButton} onClick={triggerWow} title="Wow!">
+                                    😮
+                                </button>
+                                <button className={styles.sadFailButton} onClick={triggerSadFail} title="Sad Fail">
+                                    📉
+                                </button>
+                                <button className={styles.tadaButton} onClick={triggerTada} title="Celebration!">
+                                    🎉
                                 </button>
                             </div>
                         </div>
