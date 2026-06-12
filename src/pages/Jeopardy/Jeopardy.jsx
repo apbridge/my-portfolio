@@ -17,7 +17,7 @@ import lasagna from '../../assets/jeopardy/lasagna.jpg';
 import omelette from '../../assets/jeopardy/omlette.jpg'; 
 import parfait from '../../assets/jeopardy/parfait.jpg'; 
 import pierogidumpling from '../../assets/jeopardy/pierogidumpling.jpg'; 
-import popsicle from '../../assets/jeopardy/popsicle.jpg'; 
+import breadpudding from '../../assets/jeopardy/breadpudding.jpg';
 import poutine from '../../assets/jeopardy/poutine.jpg'; 
 import sliceofpizza from '../../assets/jeopardy/sliceofpizza.png'; 
 import sushiroll from '../../assets/jeopardy/sushiroll.jpg'; 
@@ -111,7 +111,7 @@ const JeopardyPage = () => {
             tacoImage, buzzerQR, cerealwithmilk, beansontoast, beefwellington, 
             biscuitsandgravy, breadbowl, cheesecake, chickenandwaffles, chipsandsalsa, 
             curry, dairyqueenblizzard, jellydoughnut, lasagna, omelette, parfait, 
-            pierogidumpling, popsicle, poutine, sliceofpizza, sushiroll, tiramisu, sadHamsterImage
+            pierogidumpling, breadpudding, poutine, sliceofpizza, sushiroll, tiramisu, sadHamsterImage
         ];
 
         let loadedCount = 0;
@@ -622,7 +622,7 @@ const GameBoard = ({ roomCode, handleResetGame, triggerFinishGame, triggerSadHam
                 { id: "dc-400", value: 400, item: "Tiramisu", imgUrl: tiramisu, completed: false },
                 { id: "dc-600", value: 600, item: "Parfait", imgUrl: parfait, completed: false },
                 { id: "dc-800", value: 800, item: "Dairy Queen Blizzard", imgUrl: dairyqueenblizzard, completed: false },
-                { id: "dc-1000", value: 1000, item: "Popsicle", imgUrl: popsicle, completed: false },
+                { id: "dc-1000", value: 1000, item: "Bread Pudding", imgUrl: breadpudding, completed: false },
             ]
         }
     ];
